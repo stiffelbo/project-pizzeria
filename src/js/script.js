@@ -50,8 +50,6 @@
 
     const templates = {
         menuProduct: Handlebars.compile(document.querySelector(select.templateOf.menuProduct).innerHTML),
-
-        //jak tu trafiają dane z productdata? nie ma  parametru??
     };
 
     class Product {
@@ -61,6 +59,8 @@
             thisProduct.data = data;
             thisProduct.renderInMenu();
             thisProduct.getElements();
+            thisProduct.initOrderForm();
+            thisProduct.processOrder();
             thisProduct.initAccordion();
             //console.log('new Product:', thisProduct);
         }
@@ -108,7 +108,61 @@
                 }
             });
         }
+
+        initOrderForm() {
+            const thisProduct = this;
+            console.log('initOrderForm');
+            thisProduct.form.addEventListener('submit', function(event) {
+                event.preventDefault();
+                thisProduct.processOrder();
+            });
+            for (let input of thisProduct.formInputs) {
+                input.addEventListener('change', function() {
+                    thisProduct.processOrder();
+                });
+            }
+            thisProduct.cartButton.addEventListener('click', function(event) {
+                event.preventDefault();
+                thisProduct.processOrder();
+            });
+        }
+
+        processOrder() {
+            const thisProduct = this;
+            //console.log('processOrder');
+            /* convert form to object structure e.g. {sauce: ['tomato'], toppings: ['olives', 'salami']} */
+            const formData = utils.serializeFormToObject(thisProduct.form);
+            //console.log('form', formData);
+
+            /*set price to default price - ta zmienną bedziemy nadpisywac nową ceną*/
+            let price = thisProduct.data.price;
+
+            // for every category (param)...
+            for (let paramId in thisProduct.data.params) {
+                // determine param value, e.g. paramId = 'toppings', param = { label: 'Toppings', type: 'checkboxes'... }
+                const param = thisProduct.data.params[paramId];
+                // for every option in this category
+                for (let optionId in param.options) {
+                    // determine option value, e.g. optionId = 'olives', option = { label: 'Olives', price: 2, default: true }
+                    const option = param.options[optionId];
+                    //console.log("Poziom opcji menu " + optionId, option);
+                    if (formData.hasOwnProperty(paramId)) {
+                        //if checked option is not default add option price to price
+                        if (formData[paramId].includes(optionId) && !option.default) { // dlaczego tu nie moge się dostać przez dot notation formData.paramID ??
+                            price = price + option.price;
+                        }
+                        //if default option is not checked subtract option price from price
+                        if (!formData[paramId].includes(optionId) && option.default) {
+                            price = price - option.price;
+                        }
+                    }
+                }
+            }
+            // update calculated price in the HTML
+            thisProduct.priceElem.innerHTML = price;
+        }
     }
+
 
     const app = {
 
