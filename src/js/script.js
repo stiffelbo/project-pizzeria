@@ -60,6 +60,7 @@
             thisProduct.id = id;
             thisProduct.data = data;
             thisProduct.renderInMenu();
+            thisProduct.getElements();
             thisProduct.initAccordion();
             //console.log('new Product:', thisProduct);
         }
@@ -76,38 +77,40 @@
             menuContainer.appendChild(thisProduct.element);
         }
 
+        getElements() {
+            const thisProduct = this;
+
+            thisProduct.accordionTrigger = thisProduct.element.querySelector(select.menuProduct.clickable);
+            thisProduct.form = thisProduct.element.querySelector(select.menuProduct.form);
+            thisProduct.formInputs = thisProduct.form.querySelectorAll(select.all.formInputs);
+            thisProduct.cartButton = thisProduct.element.querySelector(select.menuProduct.cartButton);
+            thisProduct.priceElem = thisProduct.element.querySelector(select.menuProduct.priceElem);
+        }
+
         initAccordion() {
             const thisProduct = this;
-            /* find the clickable triggers*/
-            const clickableTrigger = thisProduct.element.querySelectorAll(select.menuProduct.clickable);
-            /* START: add event listener to clickable trigger on event click */
-            for (let trigger of clickableTrigger) {
-
-                trigger.addEventListener('click', function(event) {
-                    /*prevent default action */
-                    event.preventDefault();
-                    /*declaring clicked element*/
-                    const clickedElement = this;
-                    /* toggle active on clicked element */
-                    clickedElement.parentNode.classList.toggle('active');
-                    /* remove class 'active' from all article with class that are not parrent clicked element */
-                    const activeProducts = document.querySelectorAll('article.active');
-                    if (activeProducts) {
-                        for (let product of activeProducts) {
-                            if (product != clickedElement.parentNode) {
-                                product.classList.remove('active');
-                            }
+            /* find the clickable trigger*/
+            thisProduct.accordionTrigger.addEventListener('click', function(event) {
+                /*prevent default action */
+                event.preventDefault();
+                /*declaring clicked element*/
+                const clickedElement = this;
+                /* toggle active on clicked element */
+                clickedElement.parentNode.classList.toggle(classNames.menuProduct.wrapperActive);
+                /* remove class 'active' from all article with class that are not parrent of clicked element */
+                const activeProducts = document.querySelectorAll(select.all.menuProductsActive);
+                if (activeProducts) {
+                    for (let product of activeProducts) {
+                        if (product != clickedElement.parentNode) {
+                            product.classList.remove(classNames.menuProduct.wrapperActive);
                         }
                     }
-                });
-            }
+                }
+            });
         }
     }
 
-
     const app = {
-        //czy zastosowanie thisApp.data nie jest tworzeniem property jak poniżej??
-        //data: dataSource;
 
         initMenu: function() {
             const thisApp = this;
@@ -118,7 +121,6 @@
             }
         },
 
-        /* dlaczego to jest funkcja a nie zwykłe property pobeirające dane z innego obiektu? */
         initData: function() {
             const thisApp = this;
             thisApp.data = dataSource;
@@ -138,8 +140,6 @@
             thisApp.initMenu();
         },
     };
-
-
 
     app.init();
 }
