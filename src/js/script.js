@@ -85,6 +85,7 @@
             thisProduct.formInputs = thisProduct.form.querySelectorAll(select.all.formInputs);
             thisProduct.cartButton = thisProduct.element.querySelector(select.menuProduct.cartButton);
             thisProduct.priceElem = thisProduct.element.querySelector(select.menuProduct.priceElem);
+            thisProduct.imageWrapper = thisProduct.element.querySelector(select.menuProduct.imageWrapper);
         }
 
         initAccordion() {
@@ -96,12 +97,12 @@
                 /*declaring clicked element*/
                 const clickedElement = this;
                 /* toggle active on clicked element */
-                clickedElement.parentNode.classList.toggle(classNames.menuProduct.wrapperActive);
+                thisProduct.element.classList.toggle(classNames.menuProduct.wrapperActive);
                 /* remove class 'active' from all article with class that are not parrent of clicked element */
                 const activeProducts = document.querySelectorAll(select.all.menuProductsActive);
                 if (activeProducts) {
                     for (let product of activeProducts) {
-                        if (product != clickedElement.parentNode) {
+                        if (product != thisProduct.element) {
                             product.classList.remove(classNames.menuProduct.wrapperActive);
                         }
                     }
@@ -145,21 +146,31 @@
                 for (let optionId in param.options) {
                     // determine option value, e.g. optionId = 'olives', option = { label: 'Olives', price: 2, default: true }
                     const option = param.options[optionId];
-                    //console.log("Poziom opcji menu " + optionId, option);
-                    if (formData.hasOwnProperty(paramId)) {
-                        //if checked option is not default add option price to price
-                        if (formData[paramId].includes(optionId) && !option.default) { // dlaczego tu nie moge się dostać przez dot notation formData.paramID ??
-                            price = price + option.price;
-                        }
-                        //if default option is not checked subtract option price from price
-                        if (!formData[paramId].includes(optionId) && option.default) {
-                            price = price - option.price;
-                        }
+                    //getting image element of option
+                    const optionImage = thisProduct.imageWrapper.querySelector("." + paramId + "-" + optionId);
+                    //remove class that makes elem visible
+                    if (optionImage) {
+                        optionImage.classList.remove(classNames.menuProduct.imageVisible);
+                    }
+
+                    const optionSelected = formData[paramId] && formData[paramId].includes(optionId);
+                    //if checked option is not default add option price to price
+
+                    if (optionSelected && !option.default) { // nie mozesz sie dostać formData.paramId przez dot notation poniewaz klucz jet przekazywany w zmiennej, formData nie ma własności paramId.
+                        price = price + option.price;
+                    }
+                    //if default option is not checked subtract option price from price                   
+                    if (!optionSelected && option.default) {
+                        price = price - option.price;
+                    }
+                    //if option is checked and has image add class that makes img visible
+                    if (optionSelected && optionImage) {
+                        optionImage.classList.add(classNames.menuProduct.imageVisible);
                     }
                 }
+                // update calculated price in the HTML
+                thisProduct.priceElem.innerHTML = price;
             }
-            // update calculated price in the HTML
-            thisProduct.priceElem.innerHTML = price;
         }
     }
 
