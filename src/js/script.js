@@ -80,20 +80,21 @@
 
         getElements() {
             const thisProduct = this;
+            thisProduct.dom = {};
 
-            thisProduct.accordionTrigger = thisProduct.element.querySelector(select.menuProduct.clickable);
-            thisProduct.form = thisProduct.element.querySelector(select.menuProduct.form);
-            thisProduct.formInputs = thisProduct.form.querySelectorAll(select.all.formInputs);
-            thisProduct.cartButton = thisProduct.element.querySelector(select.menuProduct.cartButton);
-            thisProduct.priceElem = thisProduct.element.querySelector(select.menuProduct.priceElem);
-            thisProduct.imageWrapper = thisProduct.element.querySelector(select.menuProduct.imageWrapper);
-            thisProduct.amountWidgetElem = thisProduct.element.querySelector(select.menuProduct.amountWidget)
+            thisProduct.dom.accordionTrigger = thisProduct.element.querySelector(select.menuProduct.clickable);
+            thisProduct.dom.form = thisProduct.element.querySelector(select.menuProduct.form);
+            thisProduct.dom.formInputs = thisProduct.dom.form.querySelectorAll(select.all.formInputs);
+            thisProduct.dom.cartButton = thisProduct.element.querySelector(select.menuProduct.cartButton);
+            thisProduct.dom.priceElem = thisProduct.element.querySelector(select.menuProduct.priceElem);
+            thisProduct.dom.imageWrapper = thisProduct.element.querySelector(select.menuProduct.imageWrapper);
+            thisProduct.dom.amountWidgetElem = thisProduct.element.querySelector(select.menuProduct.amountWidget)
         }
 
         initAccordion() {
             const thisProduct = this;
             /* find the clickable trigger*/
-            thisProduct.accordionTrigger.addEventListener('click', function(event) {
+            thisProduct.dom.accordionTrigger.addEventListener('click', function(event) {
                 /*prevent default action */
                 event.preventDefault();
                 /*declaring clicked element*/
@@ -115,16 +116,16 @@
         initOrderForm() {
             const thisProduct = this;
             console.log('initOrderForm');
-            thisProduct.form.addEventListener('submit', function(event) {
+            thisProduct.dom.form.addEventListener('submit', function(event) {
                 event.preventDefault();
                 thisProduct.processOrder();
             });
-            for (let input of thisProduct.formInputs) {
+            for (let input of thisProduct.dom.formInputs) {
                 input.addEventListener('change', function() {
                     thisProduct.processOrder();
                 });
             }
-            thisProduct.cartButton.addEventListener('click', function(event) {
+            thisProduct.dom.cartButton.addEventListener('click', function(event) {
                 event.preventDefault();
                 thisProduct.processOrder();
             });
@@ -132,11 +133,11 @@
 
         initAmountWidget() {
             const thisProduct = this;
-            thisProduct.amountWidget = new AmountWidget(thisProduct.amountWidgetElem);
+            thisProduct.amountWidget = new AmountWidget(thisProduct.dom.amountWidgetElem);
             if (thisProduct.amountWidget) {
                 console.log("amount widget instantiated");
             }
-            thisProduct.amountWidgetElem.addEventListener('updated', function() {
+            thisProduct.dom.amountWidgetElem.addEventListener('updated', function() {
                 thisProduct.processOrder();
             });
         }
@@ -145,7 +146,7 @@
             const thisProduct = this;
 
             /* convert form to object structure e.g. {sauce: ['tomato'], toppings: ['olives', 'salami']} */
-            const formData = utils.serializeFormToObject(thisProduct.form);
+            const formData = utils.serializeFormToObject(thisProduct.dom.form);
             //console.log('form', formData);
 
             /*set price to default price - ta zmienną bedziemy nadpisywac nową ceną*/
@@ -160,7 +161,7 @@
                     // determine option value, e.g. optionId = 'olives', option = { label: 'Olives', price: 2, default: true }
                     const option = param.options[optionId];
                     //getting image element of option
-                    const optionImage = thisProduct.imageWrapper.querySelector("." + paramId + "-" + optionId);
+                    const optionImage = thisProduct.dom.imageWrapper.querySelector("." + paramId + "-" + optionId);
                     //remove class that makes elem visible
                     if (optionImage) {
                         optionImage.classList.remove(classNames.menuProduct.imageVisible);
@@ -185,7 +186,7 @@
             price *= thisProduct.amountWidget.value;
             // update calculated price in the HTML
 
-            thisProduct.priceElem.innerHTML = price;
+            thisProduct.dom.priceElem.innerHTML = price;
         }
     }
 
@@ -243,6 +244,25 @@
 
             const event = new Event('updated');
             thisWidget.element.dispatchEvent(event);
+        }
+    }
+
+    class Cart {
+        constructor(element) {
+            const thisCart = this;
+
+            thisCart.products = [];
+
+            thisCart.getElements(element);
+            console.log('new Cart', thisCart);
+        }
+
+        getElements(element) {
+            const thisCart = this;
+
+            thisCart.dom = {};
+
+            thisCart.dom.wrapper = element;
         }
     }
 
