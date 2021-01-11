@@ -31,12 +31,18 @@
                 linkIncrease: 'a[href="#more"]',
             },
         },
+        cart: {
+            toggleTrigger: '.cart__summary',
+        }
     };
 
     const classNames = {
         menuProduct: {
             wrapperActive: 'active',
             imageVisible: 'active',
+        },
+        cart: {
+            wrapperActive: 'active',
         },
     };
 
@@ -115,7 +121,7 @@
 
         initOrderForm() {
             const thisProduct = this;
-            console.log('initOrderForm');
+            // console.log('initOrderForm');
             thisProduct.dom.form.addEventListener('submit', function(event) {
                 event.preventDefault();
                 thisProduct.processOrder();
@@ -134,9 +140,6 @@
         initAmountWidget() {
             const thisProduct = this;
             thisProduct.amountWidget = new AmountWidget(thisProduct.dom.amountWidgetElem);
-            if (thisProduct.amountWidget) {
-                console.log("amount widget instantiated");
-            }
             thisProduct.dom.amountWidgetElem.addEventListener('updated', function() {
                 thisProduct.processOrder();
             });
@@ -196,9 +199,9 @@
             thisWidget.value = settings.amountWidget.defaultValue; //dane pobieram z objektu settings
             thisWidget.getElements(element);
             thisWidget.initActions();
-            console.log('AmountWidget ', thisWidget);
-            console.log('constructor arguments:', element);
-            console.log("initial value ", thisWidget.value);
+            //console.log('AmountWidget ', thisWidget);
+            //console.log('constructor arguments:', element);
+            //console.log("initial value ", thisWidget.value);
         }
 
         getElements(element) {
@@ -252,8 +255,10 @@
             const thisCart = this;
 
             thisCart.products = [];
-
+            //thisCart.initActions();
             thisCart.getElements(element);
+            thisCart.initActions();
+            //
             console.log('new Cart', thisCart);
         }
 
@@ -263,6 +268,17 @@
             thisCart.dom = {};
 
             thisCart.dom.wrapper = element;
+            thisCart.dom.toggleTrigger = element.querySelector(select.cart.toggleTrigger);
+            console.log("cart trigger: ", thisCart.dom.toggleTrigger);
+        }
+
+        initActions() {
+            const thisCart = this;
+            thisCart.dom.toggleTrigger.addEventListener('click', function() {
+                console.log('class toggle: ', thisCart.dom.wrapper.classList);
+                thisCart.dom.wrapper.classList.toggle(classNames.cart.wrapperActive);
+            });
+
         }
     }
 
@@ -284,6 +300,14 @@
 
         data: dataSource,
 
+        initCart: function() {
+            const thisApp = this;
+
+            const cartElem = document.querySelector(select.containerOf.cart);
+            //console.log(cartElem);
+            thisApp.cart = new Cart(cartElem);
+        },
+
         init: function() {
             const thisApp = this;
             /* 
@@ -295,6 +319,7 @@
             */
             thisApp.initData();
             thisApp.initMenu();
+            thisApp.initCart();
         },
     };
 
