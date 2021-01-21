@@ -80,10 +80,6 @@ class Cart {
         thisCart.totalPrice = 0;
 
         for (let product of thisCart.products) {
-
-            console.log('update product.amountWidget: ', product.amountWidget.value);
-            console.log('update product.amount: ', product.amount);
-
             subtotalPrice += product.priceSingle * product.amountWidget.value;
             totalNumber += parseInt(product.amountWidget.value);
         }

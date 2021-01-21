@@ -145,8 +145,6 @@ class Product {
             price: thisProduct.priceSingle * thisProduct.amountWidget.value,
             params: thisProduct.prepareCartProductParams()
         };
-
-        console.log(productSummary);
         return productSummary;
     }
 
