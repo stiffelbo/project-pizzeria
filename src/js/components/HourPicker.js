@@ -1,4 +1,4 @@
-import BaseWidget from '../Components/BaseWidget.js';
+import BaseWidget from '../components/BaseWidget.js';
 import { select, settings } from '../settings.js';
 import utils from '../utils.js';
 
@@ -11,6 +11,7 @@ class HourPicker extends BaseWidget {
         thisWidget.dom.output = thisWidget.dom.wrapper.querySelector(select.widgets.hourPicker.output);
         thisWidget.initPlugin();
         thisWidget.value = thisWidget.dom.input.value;
+        thisWidget.renderValue();
     }
 
     initPlugin() {
@@ -34,6 +35,7 @@ class HourPicker extends BaseWidget {
         const thisWidget = this;
 
         thisWidget.dom.output.innerHTML = thisWidget.value;
+
     }
 }
 

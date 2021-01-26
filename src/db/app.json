@@ -178,8 +178,18 @@
     "order": [],
     "event": [{
             "id": 1,
-            "date": "2019-01-01",
+            "date": "2021-01-26",
             "hour": "12:30",
+            "table": 1,
+            "repeat": false,
+            "duration": 4,
+            "ppl": 3,
+            "starters": []
+        },
+        {
+            "id": 7,
+            "date": "2021-01-26",
+            "hour": "14:30",
             "table": 1,
             "repeat": false,
             "duration": 4,
@@ -227,5 +237,25 @@
             "starters": ["lemonWater"]
         }
     ],
-    "booking": []
+    "booking": [{
+            "id": 4,
+            "date": "2021-01-26",
+            "hour": "13:00",
+            "table": 2,
+            "repeat": "daily",
+            "duration": 4,
+            "ppl": 3,
+            "starters": []
+        },
+        {
+            "id": 5,
+            "date": "2021-01-26",
+            "hour": "15:00",
+            "table": 2,
+            "repeat": "daily",
+            "duration": 3,
+            "ppl": 3,
+            "starters": []
+        }
+    ]
 }
