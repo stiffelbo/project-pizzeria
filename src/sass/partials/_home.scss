@@ -14,41 +14,51 @@
     border-radius: $radius;
 }
 
-.home-nav {
+.home-tiles {
     width: 100%;
 }
 
-.home-nav__order {
+.home-tiles__item-x2 {
     position: relative;
+    padding: 0 3px;
     flex: 0 0 50%;
-    background-image: url('../../images/pizza-1.jpg');
-    background-position: center center;
-    background-size: cover;
-    border-radius: 2px;
+    height: 120px;
+    img {
+        width: 100%;
+        height: 100%;
+        border-radius: 3px;
+        object-fit: cover;
+        z-index: 1;
+    }
+    span {
+        z-index: 10;
+    }
 }
 
-.home-nav__book {
+.home-tiles__item-x1 {
     position: relative;
-    flex: 0 0 50%;
-    background-image: url('../../images/pizza-2.jpg');
-    background-position: center center;
-    background-size: cover;
-    border-radius: 2px;
-}
-
-.home-nav__opening {
-    position: relative;
-    flex: 0 0 100%;
+    margin: 6px 3px;
+    height: 120px;
+    width: 100%;
+    border-radius: 3px;
     background-color: $color-main;
-    border-radius: 2px;
+    span {
+        z-index: 10;
+    }
 }
 
-.home-gallery {
-    margin: ($base-size * 3.5) auto;
-    padding: ($base-size * 6) ($base-size * 4);
-    background: $color-light;
-    border-bottom: 1px solid lighten($color-dark, 70%);
-    border-radius: $radius;
+.home-gallery__item {
+    position: relative;
+    flex: 0 0 33.3333%;
+    padding: 3px;
+    border-radius: 3px;
+    height: 192px;
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        z-index: 1;
+    }
 }
 
 .row {

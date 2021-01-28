@@ -52,7 +52,6 @@ class Booking {
             ) {
                 thisBooking.unpickTables();
             }
-
         });
 
         thisBooking.dom.formSubmit.addEventListener('submit', function(event) {
