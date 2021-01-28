@@ -44,14 +44,17 @@ class Booking {
         thisBooking.dateWidget = new DatePicker(thisBooking.dom.date);
         thisBooking.hourWidget = new HourPicker(thisBooking.dom.hour);
 
-        thisBooking.dom.wrapper.addEventListener('updated', function() {
+        thisBooking.dom.wrapper.addEventListener('updated', function(event) {
             thisBooking.updateDOM();
+            //check if clicked widget is not peopleAmount or hoursAmount by event details
+            if (event.detail.classes[1] != select.booking.peopleAmount.replace('.', '') &&
+                event.detail.classes[1] != select.booking.hoursAmount.replace('.', '')
+            ) {
+                thisBooking.unpickTables();
+            }
 
-            //!! zmiana ilości osób tez czyści stoliki a tak nie chcemy.
-            thisBooking.unpickTables();
         });
 
-        //nie działa listener
         thisBooking.dom.formSubmit.addEventListener('submit', function(event) {
             event.preventDefault();
             thisBooking.sendBooking();
