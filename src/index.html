@@ -10,6 +10,8 @@
     <link href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <link rel="stylesheet" href="vendor/range-slider.min.css">
+    <link rel="stylesheet" href="vendor/bootstrap-grid.min.css">
+    <link rel="stylesheet" href="vendor/flickity.css">
     <link rel="stylesheet" href="css/style.css">
 </head>
 
@@ -23,6 +25,7 @@
                     <h2 class="logo__subtitle">the best homemade Italian food</h2>
                 </div>
                 <div class="main-nav">
+                    <a href="#home">Home</a>
                     <a href="#order">Order</a>
                     <a href="#booking">Booking</a>
                 </div>
@@ -64,6 +67,9 @@
     </header>
 
     <div id="pages">
+        <section id="home">
+            <div class="home-wrapper container"></div>
+        </section>
         <section id="order">
             <div id="product-list" class="product-list container"></div>
         </section>
@@ -71,6 +77,60 @@
             <div class="booking-wrapper container"></div>
         </section>
     </div>
+
+    <script id="template-home-widget" type="text/x-handlebars-template">
+
+        <div class="home-widget">
+            <div class="home-nav">
+                <div class="row">
+                    <div class="home-nav__order col-md-6">
+                        <h1 class="home-nav__order__header">order online</h1>
+                        <h3 class="home-nav__order__text">Delicious food delivered to your door</h3>
+                    </div>
+                    <div class="home-nav__book col-md-6">
+                        <h1 class="home-nav__book__header">book table</h1>
+                        <h3 class="home-nav__book__text">Great place for meeting</h3>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="home-nav__opening col-md-12">
+                        <h1 class="home-nav__opening__header">opening hours</h1>
+                    </div>
+                </div>
+            </div>
+
+            <div class="home-carousel">
+
+            </div>
+
+            <div class="home-gallery">
+                <div class="row">
+                    <div class="col-md-4">
+                        <img src="images/pizza-4.jpg" alt="picture">
+                    </div>
+                    <div class="col-md-4">
+                        <img src="images/pizza-5.jpg" alt="picture">
+                    </div>
+                    <div class="col-md-4">
+                        <img src="images/pizza-6.jpg" alt="picture">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <img src="images/pizza-7.jpg" alt="picture">
+                    </div>
+                    <div class="col-md-4">
+                        <img src="images/pizza-8.jpg" alt="picture">
+                    </div>
+                    <div class="col-md-4">
+                        <img src="images/pizza-9.jpg" alt="picture">
+                    </div>
+                </div>
+            </div>
+            <a href="#instagram">View more on Instagram</a>
+        </div>
+
+    </script>
 
     <script id="template-booking-widget" type="text/x-handlebars-template">
         <div class="booking-widget">
@@ -263,6 +323,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.1.0/handlebars.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script src="vendor/range-slider.min.js"></script>
+    <script src="vendor/flickity.pkgd.js"></script>
     <script src="js/app.js" type="module"></script>
 </body>
 

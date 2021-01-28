@@ -4,13 +4,12 @@ import utils from '../utils.js';
 
 class HourPicker extends BaseWidget {
     constructor(wrapper) {
-        super(wrapper, settings.hours.open);
+        super(wrapper, utils.numberToHour(settings.hours.open));
         const thisWidget = this;
 
         thisWidget.dom.input = thisWidget.dom.wrapper.querySelector(select.widgets.hourPicker.input);
         thisWidget.dom.output = thisWidget.dom.wrapper.querySelector(select.widgets.hourPicker.output);
         thisWidget.initPlugin();
-        thisWidget.value = thisWidget.dom.input.value;
         thisWidget.renderValue();
     }
 
@@ -35,7 +34,6 @@ class HourPicker extends BaseWidget {
         const thisWidget = this;
 
         thisWidget.dom.output.innerHTML = thisWidget.value;
-
     }
 }
 

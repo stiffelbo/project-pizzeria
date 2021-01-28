@@ -5,12 +5,14 @@ export const select = {
         menuProduct: '#template-menu-product',
         cartProduct: '#template-cart-product', // CODE ADDED
         bookingWidget: '#template-booking-widget',
+        homeWidget: '#template-home-widget',
     },
     containerOf: {
         menu: '#product-list',
         cart: '#cart',
         pages: '#pages',
         booking: '.booking-wrapper',
+        home: '.home-wrapper',
     },
     all: {
         menuProducts: '#product-list > .product',
@@ -27,7 +29,7 @@ export const select = {
     },
     widgets: {
         amount: {
-            input: 'input.amount', // CODE CHANGED
+            input: 'input.amount',
             linkDecrease: 'a[href="#less"]',
             linkIncrease: 'a[href="#more"]',
         },
@@ -41,7 +43,7 @@ export const select = {
             output: '.output',
         },
     },
-    // CODE ADDED START
+
     cart: {
         productList: '.cart__order-summary',
         toggleTrigger: '.cart__summary',
@@ -64,6 +66,11 @@ export const select = {
         peopleAmount: '.people-amount',
         hoursAmount: '.hours-amount',
         tables: '.floor-plan .table',
+        floor: '.floor-plan',
+        formSubmit: '.booking-form',
+        starters: '.booking-options input[type=checkbox]',
+        phone: '[name="phone"]',
+        address: '[name="address"]',
     },
     nav: {
         links: '.main-nav a',
@@ -83,6 +90,7 @@ export const classNames = {
     booking: {
         loading: 'loading',
         tableBooked: 'booked',
+        tablePicked: 'picked',
     },
     nav: {
         active: 'active',
@@ -129,4 +137,5 @@ export const templates = {
     menuProduct: Handlebars.compile(document.querySelector(select.templateOf.menuProduct).innerHTML),
     cartProduct: Handlebars.compile(document.querySelector(select.templateOf.cartProduct).innerHTML),
     bookingWidget: Handlebars.compile(document.querySelector(select.templateOf.bookingWidget).innerHTML),
+    homeWidget: Handlebars.compile(document.querySelector(select.templateOf.homeWidget).innerHTML),
 };

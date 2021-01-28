@@ -6,17 +6,12 @@ class AmountWidget extends BaseWidget {
         //init base class constructor
         //przekazanie na dzien dobry do widżetu sztywnej wartości z settings
         //przywraca błąd wyświetlania niepoprawnej ilosći w koszyku oraz przeskakiwania wartości od defaulta a nie od tej przekazanej z Product
+        //wydaje mi sie ze skoro działanie jst takie ze klasa dziedzicząca odpala klase bazową to tutaj na poziomie AmountWidget powinien być parametr wartości wejściowej.
         super(element, settings.amountWidget.defaultValue);
         const thisWidget = this;
 
         thisWidget.getElements(element);
         thisWidget.initActions();
-        //update widget value if not the same as in input, simple compare
-        /*
-        if (thisWidget.input.value != thisWidget.value) {
-            thisWidget.value = parseInt(thisWidget.input.value);
-        }
-        */
     }
 
     getElements() {
@@ -55,7 +50,6 @@ class AmountWidget extends BaseWidget {
             thisWidget.setValue(thisWidget.value + 1);
         });
     }
-
 }
 
 export default AmountWidget;

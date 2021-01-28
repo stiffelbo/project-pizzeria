@@ -4,7 +4,6 @@ class BaseWidget {
 
         thisWidget.dom = {};
         thisWidget.dom.wrapper = wrapperElement;
-
         thisWidget.correctValue = initialValue;
     }
 
@@ -19,7 +18,7 @@ class BaseWidget {
         const thisWidget = this;
         const newValue = thisWidget.parseValue(value);
 
-        const isNewValue = thisWidget.correctValue != newValue && !isNaN(newValue);
+        const isNewValue = thisWidget.correctValue != newValue;
         if (isNewValue && thisWidget.isValid(value)) {
             thisWidget.correctValue = newValue;
             thisWidget.announce();

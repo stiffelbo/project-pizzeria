@@ -2,6 +2,7 @@ import { settings, select, classNames } from './settings.js'; //importowanie obj
 import Product from './components/Product.js'; //importowanie domyslne
 import Cart from './components/Cart.js'; //importowanie domyslne
 import Booking from './components/Booking.js'; //importowanie domyslne
+import Home from './components/Home.js'; //importowanie domyslne
 
 const app = {
     initPages: function() {
@@ -96,10 +97,18 @@ const app = {
         thisApp.booking = new Booking(bookingContainer);
     },
 
+    initHome: function() {
+        const thisApp = this;
+
+        const homeContainer = document.querySelector(select.containerOf.home);
+        thisApp.home = new Home(homeContainer);
+    },
+
     //initialize app methods
     init: function() {
         const thisApp = this;
         thisApp.initPages();
+        thisApp.initHome();
         thisApp.initData();
         thisApp.initCart();
         thisApp.initBooking();
