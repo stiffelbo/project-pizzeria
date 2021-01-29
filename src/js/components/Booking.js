@@ -25,6 +25,7 @@ class Booking {
         thisBooking.dom.hoursAmount = thisBooking.dom.wrapper.querySelector(select.booking.hoursAmount);
         thisBooking.dom.date = thisBooking.dom.wrapper.querySelector(select.widgets.datePicker.wrapper);
         thisBooking.dom.hour = thisBooking.dom.wrapper.querySelector(select.widgets.hourPicker.wrapper);
+        thisBooking.dom.timepicker = thisBooking.dom.wrapper.querySelector(select.booking.timepicker);
         thisBooking.dom.tables = thisBooking.dom.wrapper.querySelectorAll(select.booking.tables);
         thisBooking.dom.floor = thisBooking.dom.wrapper.querySelector(select.booking.floor);
         thisBooking.dom.formSubmit = thisBooking.dom.wrapper.querySelector(select.booking.formSubmit);
@@ -44,14 +45,18 @@ class Booking {
         thisBooking.dateWidget = new DatePicker(thisBooking.dom.date);
         thisBooking.hourWidget = new HourPicker(thisBooking.dom.hour);
 
-        thisBooking.dom.wrapper.addEventListener('updated', function(event) {
+        thisBooking.dom.timepicker.addEventListener('updated', function( /*event*/ ) {
             thisBooking.updateDOM();
+            thisBooking.unpickTables();
             //check if clicked widget is not peopleAmount or hoursAmount by event details
+            /*
             if (event.detail.classes[1] != select.booking.peopleAmount.replace('.', '') &&
                 event.detail.classes[1] != select.booking.hoursAmount.replace('.', '')
             ) {
                 thisBooking.unpickTables();
             }
+            */
+
         });
 
         thisBooking.dom.formSubmit.addEventListener('submit', function(event) {
@@ -128,7 +133,7 @@ class Booking {
                     thisBooking.unpickTables();
                     //add class picked 
                     event.target.classList.add(classNames.booking.tablePicked);
-                    console.log('Picked ' + pickedTableId);
+                    //console.log('Picked ' + pickedTableId);
                     thisBooking.pickedTableId = pickedTableId;
                 }
             }

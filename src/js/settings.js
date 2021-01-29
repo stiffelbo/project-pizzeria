@@ -71,6 +71,8 @@ export const select = {
         starters: '.booking-options input[type=checkbox]',
         phone: '[name="phone"]',
         address: '[name="address"]',
+        timepicker: '.time-picker',
+
     },
     nav: {
         links: '.main-nav a',
