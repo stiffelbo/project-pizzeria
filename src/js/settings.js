@@ -76,6 +76,7 @@ export const select = {
     },
     nav: {
         links: '.main-nav a',
+        tileLinks: '.tileLinks a',
     },
     // CODE ADDED END
 };

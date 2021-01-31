@@ -10,6 +10,7 @@ class Cart {
 
         thisCart.getElements(element);
         thisCart.initActions();
+        thisCart.update();
 
         //console.log('new Cart', thisCart);
     }

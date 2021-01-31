@@ -9,9 +9,11 @@ const app = {
         const thisApp = this;
 
         thisApp.pages = document.querySelector(select.containerOf.pages).children;
+
         thisApp.navLinks = document.querySelectorAll(select.nav.links);
 
         const idFromHash = window.location.hash.replace('#/', '');
+
         let pageMatchingHash = thisApp.pages[0].id;
         for (let page of thisApp.pages) {
             if (page.id == idFromHash) {
@@ -50,6 +52,14 @@ const app = {
                 link.getAttribute('href') == '#' + pageId
             );
         }
+
+        /*if Home page add event listeners to tile links */
+        if (pageId == 'home') {
+            thisApp.navTileLinks = document.querySelectorAll(select.nav.tileLinks);
+            console.log('tile links: ', thisApp.navTileLinks);
+        }
+
+
     },
 
     //iterate thru all products in data.products, instantiate Product for evry
@@ -102,6 +112,21 @@ const app = {
 
         const homeContainer = document.querySelector(select.containerOf.home);
         thisApp.home = new Home(homeContainer);
+        thisApp.navTileLinks = homeContainer.querySelectorAll(select.nav.tileLinks);
+        for (let link of thisApp.navTileLinks) {
+            link.addEventListener('click', function(event) {
+                const clickedElement = this;
+                console.log('clicked tile link: ', clickedElement);
+                event.preventDefault();
+                /* get page id from href */
+                const id = clickedElement.getAttribute('href').replace('#', '');
+                console.log('tileLinks: ', id);
+                /* run thisApp.activatePage with that id */
+                thisApp.activatePage(id);
+                /*change URL hash */
+                window.location.hash = '#/' + id;
+            });
+        }
     },
 
     //initialize app methods
