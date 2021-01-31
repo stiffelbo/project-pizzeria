@@ -107,28 +107,62 @@
                 </div>
             </section>
 
-            <section class="carousel">
-
+            <section class="carousel" data-flickity='{ "wrapAround": true, "prevNextButtons": false, "autoPlay": true}'>
+                <div class="carousel-cell row">
+                    <div class="carousel-cell__img_wrapper">
+                        <img src="images/pizza-2.jpg" alt="pizza_img">
+                    </div>
+                    <div class="carousel-cell__comments_wrapper">
+                        <h3 class="carousel-cell__header">Best Service</h3>
+                        <p class="carousel-cell__comment">
+                            Your service was excellent and very FAST. Many thanks for you kind and efficient service. I have already and will definitely continue to recommend your services to others in the future. Wishing you all a lovely day and weekend
+                        </p>
+                        <i class="carousel-cell__author">Tony Halik</i>
+                    </div>
+                </div>
+                <div class="carousel-cell row">
+                    <div class="carousel-cell__img_wrapper">
+                        <img src="images/pizza-1.jpg" alt="pizza_img">
+                    </div>
+                    <div class="carousel-cell__comments_wrapper">
+                        <h3 class="carousel-cell__header">Love your interior</h3>
+                        <p class="carousel-cell__comment">We felt great inside your spot. From now it is our spot to.</p>
+                        <i class="carousel-cell__author">Mr Gaudi</i>
+                    </div>
+                </div>
+                <div class="carousel-cell row">
+                    <div class="carousel-cell__img_wrapper">
+                        <img src="images/pizza-3.jpg" alt="pizza_img">
+                    </div>
+                    <div class="carousel-cell__comments_wrapper">
+                        <h3 class="carousel-cell__header">Great food</h3>
+                        <p class="carousel-cell__comment">It was best capuchino i have ever tasted, waffel was also great and crispy.</p>
+                        <i class="carousel-cell__author">Magda Gessler</i>
+                    </div>
+                </div>
             </section>
 
             <section class="gallery">
                 <div class="row">
-                    <div class="home-gallery__item">
+                    <div class="gallery__item">
                         <img src="images/pizza-4.jpg" alt="picture">
+                        <div class="gallery__hover"></div>
                         <span>
                             <i class="fas fa-heart"></i>
                             <i class="fas fa-share-alt"></i>
-                        </span>
+                            </span>
                     </div>
-                    <div class="home-gallery__item">
+                    <div class="gallery__item">
                         <img src="images/pizza-5.jpg" alt="picture">
+                        <div class="gallery__hover"></div>
                         <span>
                             <i class="fas fa-heart"></i>
                             <i class="fas fa-share-alt"></i>
                         </span>
                     </div>
-                    <div class="home-gallery__item">
+                    <div class="gallery__item">
                         <img src="images/pizza-6.jpg" alt="picture">
+                        <div class="gallery__hover"></div>
                         <span>
                             <i class="fas fa-heart"></i>
                             <i class="fas fa-share-alt"></i>
@@ -136,22 +170,25 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="home-gallery__item">
+                    <div class="gallery__item">
                         <img src="images/pizza-7.jpg" alt="picture">
+                        <div class="gallery__hover"></div>
                         <span>
                             <i class="fas fa-heart"></i>
                             <i class="fas fa-share-alt"></i>
                         </span>
                     </div>
-                    <div class="home-gallery__item">
+                    <div class="gallery__item">
                         <img src="images/pizza-8.jpg" alt="picture">
+                        <div class="gallery__hover"></div>
                         <span>
                             <i class="fas fa-heart"></i>
                             <i class="fas fa-share-alt"></i>
                         </span>
                     </div>
-                    <div class="home-gallery__item">
+                    <div class="gallery__item">
                         <img src="images/pizza-9.jpg" alt="picture">
+                        <div class="gallery__hover"></div>
                         <span>
                             <i class="fas fa-heart"></i>
                             <i class="fas fa-share-alt"></i>
@@ -159,8 +196,9 @@
                     </div>
                 </div>
             </section>
-            <footer>
-                <a href="#instagram">View more on Instagram</a>
+
+            <footer class="footer">
+                <a href="#instagram" class="footer__link">View more on Instagram</a>
             </footer>
 
         </div>
@@ -357,7 +395,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.1.0/handlebars.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script src="vendor/range-slider.min.js"></script>
-    <script src="vendor/flickity.pkgd.js"></script>
+    <script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
     <script src="js/app.js" type="module"></script>
 </body>
 
